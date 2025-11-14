@@ -1,0 +1,45 @@
+# Build folders
+build/
+out/
+bin/
+obj/
+cmake/ 
+
+# Object files
+*.o
+*.d
+
+# Firmware binaries
+*.elf
+*.bin
+*.hex
+*.map
+
+# CMake generated files
+CMakeFiles/
+CMakeCache.txt
+Makefile
+cmake_install.cmake
+
+# Vim swap files (important for privacy; contains full file paths)
+*.swp
+*.swo
+*.swm
+
+# Debugger files
+*.gdb
+*.gdbinit
+*.svd
+
+# Logs
+*.log
+
+# Python cache (if you ever write scripts)
+__pycache__/
+*.pyc
+
+# IDE config (if you ever use them later)
+.vscode/
+.idea/
+.settings/
+
