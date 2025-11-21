@@ -1,10 +1,12 @@
-#include <stdint.h>
-#include <stm32f446xx.h>
+#include "stm32f446xx.h"
+#include "system_stm32f4xx.h"
+#include "system_clock.h"
 
-uint32_t SystemCoreClock = 16000000U;
-
-void SystemInit(void)
+void system_clock_init(void)
 {
-    /* For now we just assume default reset clock config (HSI @ 16MHz). */
-    /* Later you can set PLL, HCLK, PCLK, etc. */
+	// SystemInit() is already defined in system_stm32f4xx.c
+	// Will update any clock changes if needed
+
+	SystemCoreClockUpdate();
 }
+

@@ -19,12 +19,13 @@ set(C_COMMON_FLAGS "-ffreestanding -fno-builtin -Wall -Wextra -O0 -g3")
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${MCU_FLAGS} -O2 -ffunction-sections -fdata-sections")
 set(CMAKE_ASM_FLAGS "${CMAKE_ASM_FLAGS} ${MCU_FLAGS}")
 set(CMAKE_EXE_LINKER_FLAGS
-    "${CMAKE_EXE_LINKER_FLAGS} ${MCU_FLAGS} -Wl,--gc-sections -T${CMAKE_SOURCE_DIR}/linker/stm32f446re.ld"
+    "${CMAKE_EXE_LINKER_FLAGS} ${MCU_FLAGS} -Wl,--gc-sections -T${CMAKE_SOURCE_DIR}/linker/STM32F446RETX_FLASH.ld"
 )
 
 set(SRC_FILES
     app/startup/startup_stm32f446xx.s
     app/src/core/system_clock.c
+    app/src/core/system_stm32f4xx.c
     app/src/main.c
 )
 
