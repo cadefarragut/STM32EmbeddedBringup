@@ -8,7 +8,6 @@ set(CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY)
 set(CMAKE_C_COMPILER   arm-none-eabi-gcc)
 set(CMAKE_ASM_COMPILER arm-none-eabi-gcc)
 
-
 project(stm32_minimal C ASM)
 
 set(CMAKE_C_STANDARD 11)
@@ -26,6 +25,8 @@ set(SRC_FILES
     app/startup/startup_stm32f446xx.s
     app/src/core/system_clock.c
     app/src/core/system_stm32f4xx.c
+    app/src/core/systick.c
+    app/src/drivers/gpio.c
     app/src/main.c
 )
 
@@ -41,10 +42,7 @@ target_include_directories(${PROJECT_NAME}.elf PRIVATE
     app/include
 )
 
-
 target_compile_definitions(${PROJECT_NAME}.elf PRIVATE STM32F446xx)
-
-
 
 # flash via OpenOCD
 add_custom_target(flash

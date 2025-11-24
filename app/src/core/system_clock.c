@@ -4,6 +4,15 @@
 
 void system_clock_init(void)
 {
+  //Enable Clock for GPIOC
+  RCC->AHB1ENR |= (1U << 2);
+
+  //Enable Clock for GPIOA
+  RCC->AHB1ENR |= (1U << 0);
+
+
+
+
 	// SystemInit() is already defined in system_stm32f4xx.c
 	// Will update any clock changes if needed
 
