@@ -10,5 +10,4 @@ void gpio_init(void){
   GPIOA->MODER &= ~(3U << (5 * 2));
   GPIOA->MODER |= (1U << (5 * 2));
 
-
 }

@@ -9,6 +9,13 @@ int main(void)
   gpio_init();
 
 	while (1) {
-    	
+
+    uint32_t button_pressed = ( GPIOC->IDR & (1U << 13) );
+
+    if(button_pressed){
+      GPIOA->ODR &= ~(1U << 5 );
+    } else {
+      GPIOA->ODR |= (1U << 5 );
+    }
 	}
 }
