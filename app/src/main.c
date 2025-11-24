@@ -1,10 +1,13 @@
 #include "stm32f446xx.h"
 #include "system_clock.h"
+#include "systick.h"
 #include "gpio.h"
 
 int main(void)
 {
 	system_clock_init();
+
+  SysTick_init();
 
   gpio_init();
 
