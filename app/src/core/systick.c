@@ -2,7 +2,7 @@
 #include "systick.h"
 #include "stm32f446xx.h"
 
-extern uint32_t timer_ms = 0;
+static volatile uint32_t timer_ms = 0;
 
 void SysTick_Handler(void){
   timer_ms++;
@@ -16,4 +16,13 @@ void SysTick_init(void){
   SysTick->CTRL |= (1U << 1); //Enable SysTick Interrupt 
   SysTick->CTRL |= (1U << 2); //Select Processor Clock Source
 
+}
+
+uint32_t get_time(void){
+  return timer_ms;
+}
+
+void delay(uint32_t count){
+  uint32_t start_time = timer_ms;
+  while((timer_ms - start_time) < count){}
 }
