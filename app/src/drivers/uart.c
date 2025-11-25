@@ -1,6 +1,4 @@
 #include "uart.h"
-#include "stm32f446xx.h"
-
 
 void uart_init(void){
   /* USARTDIV = f_PCLK / (16 x BAUDRATE) => 16MHz / (16 x 9600) = 104.16666
@@ -26,6 +24,24 @@ void uart_write_str(char *s){
     uart_write_char(*s);
     s++;
   }
-  uart_write_char('\n');
-  uart_write_char('\r');
+}
+
+void uart_write_num(uint32_t n){
+  char buf[12];
+  int i = 0;
+
+  if(n == '0') {
+    uart_write_char('0');
+    return;
+  }
+
+  while(n > 0){
+    buf[i++] = '0' + (n % 10);
+    n = n / 10;
+  }
+
+  while(i > 0){
+    uart_write_char(buf[i]);
+    i--;
+  }
 }

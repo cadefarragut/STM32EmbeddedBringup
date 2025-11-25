@@ -1,5 +1,3 @@
-#include "stm32f446xx.h"
-#include "system_stm32f4xx.h"
 #include "system_clock.h"
 
 void system_clock_init(void)

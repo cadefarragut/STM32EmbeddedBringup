@@ -1,8 +1,6 @@
-#include <stdint.h>
 #include "systick.h"
-#include "stm32f446xx.h"
 
-static volatile uint32_t timer_ms = 0;
+volatile uint32_t timer_ms = 0;
 
 void SysTick_Handler(void){
   timer_ms++;

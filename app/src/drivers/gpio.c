@@ -1,5 +1,4 @@
 #include "gpio.h"
-#include "stm32f446xx.h"
 
 void gpio_init(void){
 
@@ -22,8 +21,5 @@ void gpio_init(void){
   GPIOA->AFR[0] &= ~(0xF << (3 * 4));
   GPIOA->AFR[0] |= (0x7U << (2 * 4));
   GPIOA->AFR[0] |= (0x7U << (3 * 4));
-
-
-
 
 }
