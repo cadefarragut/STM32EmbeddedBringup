@@ -3,10 +3,10 @@
 
 
 void uart_init(void){
-  /* USARTDIV = f_PCLK / (16 x BAUDRATE) => 42MHz / (16 x 9600h) = 273.4375
+  /* USARTDIV = f_PCLK / (16 x BAUDRATE) => 16MHz / (16 x 9600) = 104.16666
+  *  104 == 0x68, 0.1666(16) == 2.666 -> 2 == 0x2
   *  BRR = (mantissa << 4) | (fraction & 0xF) => (0x16 << 4) | (0x13)
-  *  273 == 0x111, 0.7865(16) == 12.58 -> 13 == 0xD
-  *  BRR == 0x16D
+  *  BRR == 0x682
   */
   USART2->BRR = 0x0682;
   USART2->CR1 = 0; //Clear Everything
