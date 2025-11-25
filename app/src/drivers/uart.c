@@ -21,11 +21,10 @@ void uart_write_char(char c){
     USART2->DR = (uint8_t)c;
 }
 
-void uart_write_str(char s[]){
-  int i = 0;
-  while(s[i] != '\0'){
-    uart_write_char(s[i]);
-    i++;
+void uart_write_str(char *s){
+  while(*s != '\0'){
+    uart_write_char(*s);
+    s++;
   }
   uart_write_char('\n');
   uart_write_char('\r');
