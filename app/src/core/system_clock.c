@@ -10,6 +10,9 @@ void system_clock_init(void)
   //Enable Clock for GPIOA
   RCC->AHB1ENR |= (1U << 0);
 
+  //Enable Clock for USART2
+  RCC->APB1ENR |= (1U << 17);
+
 
 
 
