@@ -27,6 +27,7 @@ set(SRC_FILES
     app/src/core/system_stm32f4xx.c
     app/src/core/systick.c
     app/src/drivers/gpio.c
+    app/src/drivers/uart.c
     app/src/main.c
 )
 
