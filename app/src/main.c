@@ -19,19 +19,6 @@ int main(void)
   uint32_t start_time = 0;
 
 	while (1) {
-  
-    if(timer_ms - start_time > 500){
-      uart_write_str("Now: ");
-      uart_write_num(timer_ms);
-      uart_write_str(" Delta: ");
-      uart_write_num(timer_ms-start_time);
-      uart_write_char('\n');
-      uart_write_char('\r');
-      start_time = timer_ms;
-      //uart_write_num(timer_ms);
-      //`uart_write_char('\n');
-      //art_write_char('\r');
-    } 
 
     uint32_t button_pressed = ( GPIOC->IDR & (1U << 13) );
 
@@ -41,5 +28,11 @@ int main(void)
     } else {
       GPIOA->ODR |= (1U << 5 );
     }
+
+    uint8_t c;
+    if(usart2_getchar_nonblocking(&c) == 0){
+      uart_write_char((char)c);
+    }
+    delay(5);
 	}
 }

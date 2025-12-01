@@ -1,4 +1,11 @@
 #include "uart.h"
+#include "ring_buffer.h"
+
+#define USART2_RX_BUF_SIZE 64
+
+static volatile uint8_t usart2_rx_buf[USART2_RX_BUF_SIZE];
+static ring_buffer_t usart2_rx_rb;
+
 
 void uart_init(void){
   /* USARTDIV = f_PCLK / (16 x BAUDRATE) => 16MHz / (16 x 9600) = 104.16666
@@ -9,9 +16,15 @@ void uart_init(void){
   USART2->BRR = 0x0682;
   USART2->CR1 = 0; //Clear Everything
   USART2->CR1 &= ~(1U << 12); //Set M == 8 data bits
+  USART2->CR1 &= ~(1U << 10); //PCE=0 == no parity
   USART2->CR1 |= (1U << 3);  // Enable TX
   USART2->CR1 |= (1U << 2);  // Enable RX
+  USART2->CR1 |= (1U << 5);  // Enable RXNEIE Interrupt
   USART2->CR1 |= (1U << 13); // Enable USART
+  
+  rb_init(&usart2_rx_rb, usart2_rx_buf, USART2_RX_BUF_SIZE);
+  
+  NVIC_EnableIRQ(USART2_IRQn);
 }
 
 void uart_write_char(char c){
@@ -30,7 +43,7 @@ void uart_write_num(uint32_t n){
   char buf[12];
   int i = 0;
 
-  if(n == '0') {
+  if(n == 0) {
     uart_write_char('0');
     return;
   }
@@ -40,8 +53,26 @@ void uart_write_num(uint32_t n){
     n = n / 10;
   }
 
-  while(i > 0){
+  while(i--){
     uart_write_char(buf[i]);
-    i--;
   }
 }
+
+int usart2_getchar_nonblocking(uint8_t *out){
+    return rb_pop(&usart2_rx_rb, out);
+}
+
+void USART2_IRQHandler(void){
+
+  uint32_t sr = USART2->SR;;
+
+  if (sr & (1U << 5)){
+
+    uint8_t data = (uint8_t)USART2->DR;
+
+    rb_push_isr(&usart2_rx_rb, data);
+
+  }
+
+}
+

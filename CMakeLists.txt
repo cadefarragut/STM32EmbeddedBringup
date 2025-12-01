@@ -28,6 +28,7 @@ set(SRC_FILES
     app/src/core/systick.c
     app/src/drivers/gpio.c
     app/src/drivers/uart.c
+    app/src/drivers/ring_buffer.c
     app/src/main.c
 )
 
