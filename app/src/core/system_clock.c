@@ -11,7 +11,8 @@ void system_clock_init(void)
   //Enable Clock for USART2
   RCC->APB1ENR |= (1U << 17);
 
-
+  //Enable Clock for SYSCFGEN
+  RCC->APB2ENR |= (1U << 14); 
 
 
 	// SystemInit() is already defined in system_stm32f4xx.c

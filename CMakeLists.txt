@@ -29,6 +29,7 @@ set(SRC_FILES
     app/src/drivers/gpio.c
     app/src/drivers/uart.c
     app/src/drivers/ring_buffer.c
+    app/src/drivers/button_exti.c
     app/src/main.c
 )
 
