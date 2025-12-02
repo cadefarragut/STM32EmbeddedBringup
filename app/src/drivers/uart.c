@@ -69,10 +69,7 @@ void USART2_IRQHandler(void){
   if (sr & (1U << 5)){
 
     uint8_t data = (uint8_t)USART2->DR;
-
     rb_push_isr(&usart2_rx_rb, data);
 
   }
-
 }
-
